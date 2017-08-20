@@ -10,12 +10,25 @@ else
 fi
 
 # Remove old install
-rm -rf atom/out/atom-*/
+sudo rm -rf atom/apm/node_modules
+sudo rm -rf atom/out/atom-*/
 
 # Docker - Install Atom
 docker build -t robertov82008/docker-atom .
-docker run --rm --name docker-atom -v $PWD/atom:/atom -ti robertov82008/docker-atom script/build
+docker run --rm --name docker-atom -v $PWD/atom:/atom -ti robertov82008/docker-atom script/build --install
 
-# Create link atom-amd64
-FILE_ATOM=$(find atom/out -name atom)
-ln -s -f $FILE_ATOM atom-amd64
+# Fix .desktop
+echo 'Fix atom.desktop'
+
+su root -c 'cat <<EOF > /usr/local/share/applications/atom.desktop
+[Desktop Entry]
+Name=Atom
+Comment=A hackable text editor for the 21st Century.
+GenericName=Text Editor
+Exec=/usr/local/share/atom/atom %F
+Icon=/usr/local/share/atom/atom.png
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Utility;TextEditor;Development;
+MimeType=text/plain;
+EOF'
