@@ -17,6 +17,3 @@ RUN dnf --assumeyes install \
      libxkbfile-devel
 
 RUN npm install -g npm --prefix=/usr/lib/ --loglevel error
-
-# ADD ./atom /atom
-# WORKDIR /atom

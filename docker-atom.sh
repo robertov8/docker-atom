@@ -9,10 +9,6 @@ else
     git clone https://github.com/atom/atom.git
 fi
 
-# Remove old install
-sudo rm -rf atom/apm/node_modules
-sudo rm -rf atom/out/atom-*/
-
 # Docker - Install Atom
 docker-compose run atom script/build --install
 
