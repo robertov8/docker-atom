@@ -14,8 +14,7 @@ sudo rm -rf atom/apm/node_modules
 sudo rm -rf atom/out/atom-*/
 
 # Docker - Install Atom
-docker build -t robertov82008/docker-atom .
-docker run --rm --name docker-atom -v $PWD/atom:/atom -ti robertov82008/docker-atom script/build --install
+docker-compose run atom script/build --install
 
 # Fix .desktop
 echo 'Fix atom.desktop'

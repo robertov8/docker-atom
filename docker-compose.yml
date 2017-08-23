@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+    atom:
+        build: .
+        volumes:
+            - ./atom:/usr/src/app
+            - /usr/local/:/usr/local/

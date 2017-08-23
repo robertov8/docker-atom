@@ -18,5 +18,5 @@ RUN dnf --assumeyes install \
 
 RUN npm install -g npm --prefix=/usr/lib/ --loglevel error
 
-ADD ./atom /atom
-WORKDIR /atom
+# ADD ./atom /atom
+# WORKDIR /atom
