@@ -2,12 +2,26 @@
 
 # Download atom
 if [ -d "atom" ]; then
-    cd atom
-    git pull
-    cd ..
+    cd atom && git pull
 else
-    git clone https://github.com/atom/atom.git
+    git clone https://github.com/atom/atom.git && cd atom
 fi
+
+# Choise version
+# List last version
+counter=1
+for i in $( git tag --sort=creatordate | tail -n 10 ); do
+	echo "${counter} - $i"
+	let counter=counter+1
+done
+
+printf "\nChoise number your version: "
+read CHOISE
+
+VERSION=$( git tag --sort=creatordate | tail -n 10 | sed "$CHOISE q;d" )
+git checkout -B $VERSION
+
+cd ..
 
 # Docker - Install Atom
 docker-compose run atom script/build --install
